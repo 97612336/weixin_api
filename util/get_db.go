@@ -36,7 +36,7 @@ func Get_home_path() string {
 	return user_home
 }
 
-//获取配置文件信息
+//获取mysql配置文件信息
 func Get_conf_info() models.SqlConf {
 	user_home := Get_home_path()
 	config_file := user_home + "/conf/sqlconf"
@@ -51,4 +51,18 @@ func Get_conf_info() models.SqlConf {
 	//把json数据赋值给实例化的数据配置对象
 	json.Unmarshal(sql_json, &sqlconf)
 	return sqlconf
+}
+
+//获取上传文件的验证文件
+func Get_img_account() models.Upload_account {
+	user_home := Get_home_path()
+	config_file := user_home + "/conf/upload_account"
+	data, _ := ioutil.ReadFile(config_file)
+	//将读取到的文件转化为字符串
+	str_data := string(data)
+	var account models.Upload_account
+	//将读取到的配置文件赋值给类型
+	var account_json = []byte(str_data)
+	json.Unmarshal(account_json, &account)
+	return account
 }

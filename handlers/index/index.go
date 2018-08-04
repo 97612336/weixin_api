@@ -34,7 +34,6 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	return
 }
 
-
 //去往上传文件页,并执行验证
 func Add_file(w http.ResponseWriter, r *http.Request) {
 	//获取表单提交的信息
@@ -42,7 +41,7 @@ func Add_file(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
 		username := r.PostFormValue("username")
 		password := r.PostFormValue("password")
-		info := util.Get_conf_info()
+		info := util.Get_img_account()
 		if info.Upload_name == username {
 			if info.Upload_password == password {
 				tmpl, _ := template.ParseFiles("template/upload_file.html")
@@ -67,8 +66,8 @@ func Upload_file(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
 	var err error
 	//获取表单文件
-	file, header, err:= r.FormFile("file")
-	if err!=nil{
+	file, header, err := r.FormFile("file")
+	if err != nil {
 		log.Println("接收表单文件出错")
 		log.Println(err)
 		return
@@ -77,7 +76,7 @@ func Upload_file(w http.ResponseWriter, r *http.Request) {
 	//创建写入到本地的文件
 	file_path_and_name := config.Static_Path + header.Filename
 	f, err := os.Create(file_path_and_name)
-	if err!=nil{
+	if err != nil {
 		log.Println("创建本地文件的时候出错")
 		log.Println(err)
 	}
