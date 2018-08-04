@@ -7,6 +7,4 @@ type SqlConf struct {
 	SqlPassword string
 	SqlHost string
 	SqlPort string
-	Upload_name string
-	Upload_password string
 }

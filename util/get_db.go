@@ -25,16 +25,21 @@ func Get_sql_db() *sql.DB {
 	return db
 }
 
-//获取配置文件信息
-func Get_conf_info() models.SqlConf {
-	//得到家目录下的配置文件
+//得到家目录的路径
+func Get_home_path() string {
 	current_user, err := user.Current()
 	if nil != err {
 		fmt.Println("get user current dir err:", current_user.HomeDir)
-		return models.SqlConf{}
+		return ""
 	}
 	user_home := current_user.HomeDir
-	config_file := user_home + "/.sqlconf"
+	return user_home
+}
+
+//获取配置文件信息
+func Get_conf_info() models.SqlConf {
+	user_home := Get_home_path()
+	config_file := user_home + "/conf/sqlconf"
 	//	读取数据库配置文件
 	data, _ := ioutil.ReadFile(config_file)
 	//转化为字符串格式
