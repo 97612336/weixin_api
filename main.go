@@ -3,19 +3,18 @@ package main
 import (
 	"net/http"
 	"log"
-	handlers "weixin_api/handlers"
+	"weixin_api/handlers"
 	_ "github.com/go-sql-driver/mysql"
-	"weixin_api/util"
-)
+	)
 
 func init(){
-	util.DB=util.Get_sql_db()
+	//util.DB=util.Get_sql_db()
 }
 
 
 
 func main(){
-	defer util.DB.Close()
+	//defer util.DB.Close()
 
 	var err error
 	//设置路由
